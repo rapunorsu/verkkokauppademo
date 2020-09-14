@@ -44,7 +44,7 @@ const App =() => {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shopcart">
-            <Shoppingcart Prod = {myProducts} SetProd ={setMyProducts} />
+            <Shoppingcart prod = {myProducts} SetProd ={setMyProducts} />
           </Route>
           <Route path="/">
             <Home myprod={myProducts} setmypr={setMyProducts}/>

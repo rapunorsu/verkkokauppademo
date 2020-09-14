@@ -11,24 +11,25 @@ const Product = ({products, addCart, ShoppingCart}) => {
     const [infoText,setInfoText]= useState("");
     
     const infoTest = () =>{
-    setInfoText("Tuote lisätty ostoskoriin")
-    setInterval(() => {
-    setInfoText("");
-    },3500)
-    } 
-    const AmountSet = (addition) => {
-    if (addition < 0 && amount > 0) {
-    setAmount(amount + addition)
-   
-    } else if (addition >= 0) {
-    setAmount(amount + addition)
+        setInfoText("Tuote lisätty ostoskoriin")
+        setInterval(() => {
+        setInfoText("");
+        },3500)
+        } 
+        const amountSet = (addition) => {
+        if (addition < 0 && amount > 0) {
+        setAmount(amount + addition)
+    
+        } else if (addition >= 0) {
+        setAmount(amount + addition)
+        console.log(amount)
+        } else if (addition === 0) {
+        setAmount(0)
+        }
+    }
+
     console.log(amount)
-    } else if (addition = 0) {
-    setAmount(amount = 0)
-    }
-    }
-
-
+    console.log(products)
 
     return (
     <div>
@@ -47,8 +48,8 @@ const Product = ({products, addCart, ShoppingCart}) => {
             <td>{amount} <br></br>
 
 
-            <button style={buttonstyle} onClick={() => AmountSet(-1)}>-</button>
-            <button style={buttonstyle} onClick={() => AmountSet(+1)}>+</button>
+            <button style={buttonstyle} onClick={() => amountSet(-1)}>-</button>
+            <button style={buttonstyle} onClick={() => amountSet(+1)}>+</button>
 
             <br/>
 
@@ -57,7 +58,7 @@ const Product = ({products, addCart, ShoppingCart}) => {
             <ShoppingCart items={this.state.cart} lockScroll = {this.lockScroll} notMobile = {this.state.notMobile} checkout= {this.checkout}/> 
             </section> */}
 
-            <button onClick={()=> addCart()}> Lisää ostoskoriin</button>
+            <button onClick={()=> addCart(amount, products.id)}> Lisää ostoskoriin</button>
             
             </td>
             
@@ -69,12 +70,12 @@ const Product = ({products, addCart, ShoppingCart}) => {
 
 const Products1 = ({products, setProds}) => {
 
-    const addCart = (id) => {
-        const tempCart = products.map(img => {
-            if(products.id === id){
-                products = {...products, amount: (products.amount + 1)};
+    const addCart = (amount, id) => {
+        const tempCart = products.map(product => {
+            if(product.id === id){
+                product = {...product, amount: (amount)};
             }
-            return img;
+            return product;
         })
         setProds(tempCart);
     }
